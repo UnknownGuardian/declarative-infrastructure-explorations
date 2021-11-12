@@ -17,7 +17,7 @@ class Client {
 
 @deferrable(Time.upTo(40, TimeUnits.Seconds))
 class BuildService {
-    @inject('build-service') database?:Database;
+    @inject('database') database?:Database;
 
     accept() {
         // calls database
@@ -35,6 +35,7 @@ class Database {
 ```
 
 `@deferrable` encodes the SLA in code, for use by a build tool.
+
 `@inject` encodes dependency injection, a place where the build tool could decide to split up the application, perhaps by injecting either a direct in-memory reference, or a REST call to the service on another machine.
 
 ## Priorities

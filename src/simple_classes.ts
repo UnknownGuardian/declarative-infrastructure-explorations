@@ -15,7 +15,7 @@ class Client {
 
 @deferrable(Time.upTo(40, TimeUnits.Seconds))
 class BuildService {
-    @inject('build-service') database?:Database;
+    @inject('database') database?:Database;
 
     @log()
     accept() {
