@@ -38,6 +38,8 @@ class Database {
 
 `@inject` encodes dependency injection, a place where the build tool could decide to split up the application, perhaps by injecting either a direct in-memory reference, or a REST call to the service on another machine.
 
+A [more complex example](./src/tweeter.ts) representing how Twitter might handle a new status being posted.
+
 ## Priorities
 1. Code up an application as if it was not distributed
 2. Declarative code statements about acceptable behavior
