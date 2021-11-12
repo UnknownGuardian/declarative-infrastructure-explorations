@@ -79,5 +79,13 @@ When you have 2 @inject, what is the order they are called in. Can we infer
 properties of how they are executed to determine if we need to split off one
 of them into their own instance?
 
+Is the @deferrable on the right thing? Should it be on the method call or on the callee?
+
+Who decides to do batching?
+What type of batching?
+    DynamoDB batching - do we just always write to dynamodb in batches?
+    Request batching - ????
+
+
 
  */
