@@ -1,14 +1,14 @@
-import {inject, log, deferrable, Time, TimeUnits }from "./decorators";
+import { inject, log, deferrable, Time, TimeUnits } from "./decorators";
 
 
 class PostStatusHandler {
-    @inject('authtable') authTable?:AuthTable;
-    @inject('story-table') storyTable?:StoryTable;
-    @inject('follows-fetcher-handler') followsFetcher?:FollowsFetcherHandler;
+    @inject('auth-table') authTable?: AuthTable;
+    @inject('story-table') storyTable?: StoryTable;
+    @inject('follows-fetcher-handler') followsFetcher?: FollowsFetcherHandler;
 
     @log()
     accept() {
-        if(this.authTable!.accept()) {
+        if (this.authTable!.accept()) {
             this.storyTable!.accept();
             this.followsFetcher!.accept();
         }
@@ -17,8 +17,8 @@ class PostStatusHandler {
 
 @deferrable(Time.upTo(40, TimeUnits.Seconds))
 class FollowsFetcherHandler {
-    @inject('follows-table') followsTable?:FollowsTable;
-    @inject('feed-writer-handler') feedWriter?:FeedWriterHandler;
+    @inject('follows-table') followsTable?: FollowsTable;
+    @inject('feed-writer-handler') feedWriter?: FeedWriterHandler;
 
     @log()
     accept() {
@@ -29,7 +29,7 @@ class FollowsFetcherHandler {
 
 @deferrable(Time.upTo(20, TimeUnits.Seconds))
 class FeedWriterHandler {
-    @inject('feed-table') feedTable?:FeedTable;
+    @inject('feed-table') feedTable?: FeedTable;
 
     @log()
     accept() {
@@ -40,7 +40,7 @@ class FeedWriterHandler {
 class AuthTable {
     @log()
     accept() {
-        if(Math.random() > 0.5)
+        if (Math.random() > 0.5)
             return 1;
         return 0;
     }
@@ -48,7 +48,7 @@ class AuthTable {
 class StoryTable {
     @log()
     accept() {
-        if(Math.random() > 0.5)
+        if (Math.random() > 0.5)
             return 1;
         return 0;
     }
@@ -56,7 +56,7 @@ class StoryTable {
 class FollowsTable {
     @log()
     accept() {
-        if(Math.random() > 0.5)
+        if (Math.random() > 0.5)
             return 1;
         return 0;
     }
@@ -64,7 +64,7 @@ class FollowsTable {
 class FeedTable {
     @log()
     accept() {
-        if(Math.random() > 0.5)
+        if (Math.random() > 0.5)
             return 1;
         return 0;
     }
@@ -75,7 +75,7 @@ new PostStatusHandler().accept();
 
 /*
 Notes:
-When you have 2 @inject, what is the order they are called in. Can we infer 
+When you have 2 @inject, what is the order they are called in. Can we infer
 properties of how they are executed to determine if we need to split off one
 of them into their own instance?
 
